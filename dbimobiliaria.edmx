@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="imobiliariaModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_completo" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="cpf" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="data_nascimento" Type="date" />
+          <Property Name="sexo" Type="varchar" MaxLength="1" />
+          <Property Name="tipo_de_pessoa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="senha" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="imoveis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="rua" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bairro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="imagem1" Type="varchar" MaxLength="200" />
+          <Property Name="imagem2" Type="varchar" MaxLength="200" />
+          <Property Name="imagem3" Type="varchar" MaxLength="200" />
+          <Property Name="numero" Type="int" Nullable="false" />
+          <Property Name="valor_aluguel" Type="float" />
+          <Property Name="valor_de_venda" Type="float" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_cliente" Type="int" />
+          <Property Name="cidade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cep" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descricao_imovel" Type="varchar" MaxLength="8000" />
+          <Property Name="fone" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_cliente_imovel">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="imoveis" Type="Self.imoveis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="imoveis">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="imobiliariaModel1StoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imoveis" EntityType="Self.imoveis" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_cliente_imovel" Association="Self.FK_cliente_imovel">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="imoveis" EntitySet="imoveis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="imobiliariaModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_completo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cpf" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data_nascimento" Type="DateTime" Precision="0" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_de_pessoa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="imoveis" Relationship="Self.FK_cliente_imovel" FromRole="cliente" ToRole="imoveis" />
+        </EntityType>
+        <EntityType Name="imoveis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="rua" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="imagem1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="imagem2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="imagem3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="numero" Type="Int32" Nullable="false" />
+          <Property Name="valor_aluguel" Type="Double" />
+          <Property Name="valor_de_venda" Type="Double" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_cliente" Type="Int32" />
+          <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descricao_imovel" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="fone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK_cliente_imovel" FromRole="imoveis" ToRole="cliente" />
+        </EntityType>
+        <Association Name="FK_cliente_imovel">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="imoveis" Type="Self.imoveis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="imoveis">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="imobiliariaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="imoveis" EntityType="Self.imoveis" />
+          <AssociationSet Name="FK_cliente_imovel" Association="Self.FK_cliente_imovel">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="imoveis" EntitySet="imoveis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="imobiliariaModel1StoreContainer" CdmEntityContainer="imobiliariaEntities1">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="imobiliariaModel1.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome_completo" ColumnName="nome_completo" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="tipo_de_pessoa" ColumnName="tipo_de_pessoa" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imoveis">
+            <EntityTypeMapping TypeName="imobiliariaModel1.imoveis">
+              <MappingFragment StoreEntitySet="imoveis">
+                <ScalarProperty Name="rua" ColumnName="rua" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="imagem1" ColumnName="imagem1" />
+                <ScalarProperty Name="imagem2" ColumnName="imagem2" />
+                <ScalarProperty Name="imagem3" ColumnName="imagem3" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="valor_aluguel" ColumnName="valor_aluguel" />
+                <ScalarProperty Name="valor_de_venda" ColumnName="valor_de_venda" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="descricao_imovel" ColumnName="descricao_imovel" />
+                <ScalarProperty Name="fone" ColumnName="fone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

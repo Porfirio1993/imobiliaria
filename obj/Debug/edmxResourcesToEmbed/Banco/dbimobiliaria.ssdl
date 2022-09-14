@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="imobiliariaModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome_completo" Type="varchar" MaxLength="90" Nullable="false" />
+    <Property Name="cpf" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="data_nascimento" Type="date" />
+    <Property Name="sexo" Type="varchar" MaxLength="1" />
+    <Property Name="tipo_de_pessoa" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="status" Type="bit" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="senha" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="imoveis">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="rua" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="bairro" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="imagem1" Type="varchar" MaxLength="200" />
+    <Property Name="imagem2" Type="varchar" MaxLength="200" />
+    <Property Name="imagem3" Type="varchar" MaxLength="200" />
+    <Property Name="numero" Type="int" Nullable="false" />
+    <Property Name="valor_aluguel" Type="float" />
+    <Property Name="valor_de_venda" Type="float" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_cliente" Type="int" />
+    <Property Name="cidade" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cep" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="descricao_imovel" Type="varchar" MaxLength="8000" />
+    <Property Name="fone" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_cliente_imovel">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+    <End Role="imoveis" Type="Self.imoveis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="imoveis">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="imobiliariaModel1StoreContainer">
+    <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="imoveis" EntityType="Self.imoveis" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_cliente_imovel" Association="Self.FK_cliente_imovel">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="imoveis" EntitySet="imoveis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

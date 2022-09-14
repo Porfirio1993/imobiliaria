@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="imobiliariaModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome_completo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cpf" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="data_nascimento" Type="DateTime" Precision="0" />
+    <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_de_pessoa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="status" Type="Boolean" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="imoveis" Relationship="Self.FK_cliente_imovel" FromRole="cliente" ToRole="imoveis" />
+  </EntityType>
+  <EntityType Name="imoveis">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="rua" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imagem1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="imagem2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="imagem3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="numero" Type="Int32" Nullable="false" />
+    <Property Name="valor_aluguel" Type="Double" />
+    <Property Name="valor_de_venda" Type="Double" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_cliente" Type="Int32" />
+    <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descricao_imovel" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+    <Property Name="fone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="cliente" Relationship="Self.FK_cliente_imovel" FromRole="imoveis" ToRole="cliente" />
+  </EntityType>
+  <Association Name="FK_cliente_imovel">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+    <End Role="imoveis" Type="Self.imoveis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="imoveis">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="imobiliariaEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cliente" EntityType="Self.cliente" />
+    <EntitySet Name="imoveis" EntityType="Self.imoveis" />
+    <AssociationSet Name="FK_cliente_imovel" Association="Self.FK_cliente_imovel">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="imoveis" EntitySet="imoveis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

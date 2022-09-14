@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="imobiliariaModel1StoreContainer" CdmEntityContainer="imobiliariaEntities1">
+    <EntitySetMapping Name="cliente">
+      <EntityTypeMapping TypeName="imobiliariaModel1.cliente">
+        <MappingFragment StoreEntitySet="cliente">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nome_completo" ColumnName="nome_completo" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+          <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="tipo_de_pessoa" ColumnName="tipo_de_pessoa" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="imoveis">
+      <EntityTypeMapping TypeName="imobiliariaModel1.imoveis">
+        <MappingFragment StoreEntitySet="imoveis">
+          <ScalarProperty Name="rua" ColumnName="rua" />
+          <ScalarProperty Name="bairro" ColumnName="bairro" />
+          <ScalarProperty Name="imagem1" ColumnName="imagem1" />
+          <ScalarProperty Name="imagem2" ColumnName="imagem2" />
+          <ScalarProperty Name="imagem3" ColumnName="imagem3" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="valor_aluguel" ColumnName="valor_aluguel" />
+          <ScalarProperty Name="valor_de_venda" ColumnName="valor_de_venda" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+          <ScalarProperty Name="cidade" ColumnName="cidade" />
+          <ScalarProperty Name="cep" ColumnName="cep" />
+          <ScalarProperty Name="descricao_imovel" ColumnName="descricao_imovel" />
+          <ScalarProperty Name="fone" ColumnName="fone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
